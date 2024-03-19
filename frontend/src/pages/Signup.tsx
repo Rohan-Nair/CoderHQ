@@ -1,21 +1,36 @@
 import { MdOutlineHouseboat } from "react-icons/md";
 import { Spotlight } from "../components/ui/Spotlight";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
+    const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.post('/signup', {
-            name,
-            email,
-            password
-        })
-        console.log("helloworld")
+        try {
+            const response = await axios.post('/signup', {
+                name,
+                email,
+                password
+            })
+            if (response.status === 200) {
+                toast.success("You can now login");
+                navigate('/login');
+            } else if (response.status === 201) {
+                toast("You are already registered");
+                navigate('/login');
+            }
+
+        } catch (e: any) {
+            console.log(e.message);
+            toast.error("Something went wrong");
+        }
+
     }
 
     return (
@@ -35,6 +50,7 @@ const Signup = () => {
                             type="text"
                             placeholder='Name'
                             className='p-2 rounded-md bg-bground'
+                            required
                         />
                         <input
                             value={email}
@@ -42,6 +58,7 @@ const Signup = () => {
                             type="text"
                             placeholder='Email'
                             className='p-2 rounded-md bg-bground'
+                            required
                         />
                         <input
                             value={password}
@@ -49,6 +66,7 @@ const Signup = () => {
                             type="password"
                             placeholder='Password'
                             className='p-2 rounded-md bg-bground'
+                            required
                         />
                         <button type="submit" className='bg-pmainhover hover:bg-pmainhover text-white font-medium py-2 rounded-md'>Register Now</button>
                     </form>
