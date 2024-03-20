@@ -58,17 +58,20 @@ router.post('/login', async (req: Request, res: Response) => {
 
 router.get('/user', async (req: Request, res: Response) => {
     try {
-        const token = req.cookies.jwt;
+        const token = req.cookies['jwt'];
         if (!token) {
-            res.status(401).json({ message: "Unauthorized" });
+            res.status(201).json({ message: "Unauthorized" });
             return;
         }
         const verified = jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload;
         const user = await UserModel.findOne({
             email: verified.email,
-            name: verified.name
         });
-        res.status(200).json({ user });
+        const info = {
+            name: user.name,
+            email: user.email
+        }
+        res.status(200).json({ info });
     } catch (e: any) {
         res.status(500).json({ message: "error" });
     }
@@ -76,10 +79,13 @@ router.get('/user', async (req: Request, res: Response) => {
 
 
 router.post('/logout', async (req: Request, res: Response) => {
-    res.cookie('jwt', '', { maxAge: 0 });
-    res.status(200).json({ message: "success" });
-}
-);
+    try {
+        res.clearCookie('jwt');
+        res.status(200).json({ message: "success" });
+    } catch (e: any) {
+        res.status(500).json({ message: "error" });
+    }
+});
 
 router.get('/', async (req: Request, res: Response) => res.send("running"))
 

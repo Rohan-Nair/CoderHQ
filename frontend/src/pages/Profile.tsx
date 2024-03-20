@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { MdOutlineHouseboat } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/store";
 import toast from "react-hot-toast";
-const IndexP = () => {
+import { MdOutlineHouseboat } from "react-icons/md";
+import { useAuthStore } from "../store/store";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+const Profile = () => {
     const { user } = useAuthStore();
     const navigate = useNavigate();
 
-
+    // checking if user has logged in or not
     useEffect(() => {
         (
             async () => {
@@ -21,8 +22,13 @@ const IndexP = () => {
                 }
             }
         )()
+        if (!user) {
+            toast.error("You need to login first");
+            navigate('/login')
+        }
     }, [])
 
+    // function for when the logout button is clicked
     const logoutFunction = async () => {
         const response = await axios.post('/logout', {}, { withCredentials: true });
         if (response.status !== 200) {
@@ -46,22 +52,17 @@ const IndexP = () => {
                             <MdOutlineHouseboat className='text-white bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-xl'>FloatFind</span>
                         </a>
-                        {
-                            user ? (<div className='flex gap-2 justify-center items-center'>
-                                <Link to={"/profile"}>{user.name}</Link>
-                                <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Logout</button>
-                            </div>) : (
-                                <div className='flex gap-2'>
-                                    <Link to={"/login"} className='bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Login</Link>
-                                    <Link to={"/signup"} className='hidden sm:block bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Signup</Link>
-                                </div>
-                            )
-                        }
+
+                        <div className='flex gap-2 justify-center items-center'>
+                            <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Logout</button>
+                        </div>
+
                     </header>
                 </div>
             </div>
         </>
-    )
+    );
+
 }
 
-export default IndexP
+export default Profile;
