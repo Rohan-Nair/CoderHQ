@@ -4,14 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners"
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post('/signup', {
                 name,
@@ -27,8 +30,9 @@ const Signup = () => {
             }
 
         } catch (e: any) {
-            console.log(e.message);
             toast.error("Something went wrong");
+        } finally {
+            setLoading(false);
         }
 
     }
@@ -68,7 +72,7 @@ const Signup = () => {
                             className='p-2 rounded-md bg-bground'
                             required
                         />
-                        <button type="submit" className='bg-pmainhover hover:bg-pmainhover text-white font-medium py-2 rounded-md'>Register Now</button>
+                        <button type="submit" className='bg-pmainhover hover:bg-pmainhover text-white font-medium py-2 rounded-md'>{loading ? <ClipLoader color="#fff" size={24} /> : "Register Now"}</button>
                     </form>
                     <p className="text-center">Already have an account? <Link className="text-pmainhover font-medium hover:underline" to={"/login"}>Login</Link></p>
                 </div>
