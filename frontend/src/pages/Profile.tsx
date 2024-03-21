@@ -16,16 +16,16 @@ const Profile = () => {
                 const response = await axios.get('/user', { withCredentials: true });
                 if (response.status === 201) {
                     useAuthStore.setState({ user: null })
+                    if (!user) {
+                        toast.error("You need to login first");
+                        navigate('/login')
+                    }
                 }
                 if (response.status === 200) {
                     useAuthStore.setState({ user: response.data.info })
                 }
             }
         )()
-        if (!user) {
-            toast.error("You need to login first");
-            navigate('/login')
-        }
     }, [])
 
     // function for when the logout button is clicked
