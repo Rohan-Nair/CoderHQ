@@ -4,6 +4,7 @@ interface AuthState {
     user: {
         name: string,
         email: string,
+        pfp: string
     } | null,
 
 
@@ -11,4 +12,19 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>(() => ({
     user: null,
+}))
+
+
+interface ProblemsState {
+    problems: {
+        name: string,
+        title: string,
+        description: string,
+        input: string,
+        output: string,
+    }[]
+}
+
+export const useProblemsStore = create<ProblemsState>(() => ({
+    problems: [],
 }))

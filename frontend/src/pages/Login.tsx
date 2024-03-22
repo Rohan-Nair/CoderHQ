@@ -1,4 +1,4 @@
-import { MdOutlineHouseboat } from "react-icons/md";
+import { GiSadCrab } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -44,7 +44,7 @@ const Login = () => {
 
                     <div className='flex flex-col items-center justify-center gap-4 p-6 bg-gray-200 min-w-[20rem] min-h-[400px] shadow-lg rounded-lg'>
                         <a href="" className='flex items-center gap-2'>
-                            <MdOutlineHouseboat className='text-white bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
+                            <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-3xl'>FloatFind</span>
                         </a>
                         <h1 className='text-2xl font-medium'>Login</h1>

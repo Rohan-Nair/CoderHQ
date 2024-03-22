@@ -12,6 +12,13 @@ export const signup = async (req: Request, res: Response) => {
         res.status(201).json({ message: "User already exists" });
         return;
     }
+    const usernameExists = await UserModel.findOne({
+        name
+    });
+    if (usernameExists) {
+        res.status(202).json({ message: "Please choose a different username" }); 
+        return; 
+    }
     try {
         const salt = await bcryptjs.genSalt(10)
         const hashedpwd = await bcryptjs.hash(password, salt)

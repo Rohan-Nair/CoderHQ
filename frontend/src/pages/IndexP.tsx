@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { MdOutlineHouseboat } from "react-icons/md";
+import { GiSadCrab } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/store";
+import { useAuthStore, useProblemsStore } from "../store/store";
 import toast from "react-hot-toast";
 const IndexP = () => {
     const { user } = useAuthStore();
+    const { problems } = useProblemsStore();
     const navigate = useNavigate();
 
 
@@ -19,8 +20,17 @@ const IndexP = () => {
                 if (response.status === 200) {
                     useAuthStore.setState({ user: response.data.info })
                 }
+                const response2 = await axios.get('/problems', { withCredentials: true });
+                if (response2.status === 201) {
+                    toast.error("Something went wrong")
+                    return;
+                } else {
+                    useProblemsStore.setState({ problems: response2.data.problems })
+                }
+
             }
         )()
+
     }, [])
 
     const logoutFunction = async () => {
@@ -41,9 +51,8 @@ const IndexP = () => {
             <div className='flex justify-center'>
                 <div className='max-w-[1920px] w-full'>
                     <header className='w-full flex justify-between items-center p-3 shadow-sm shadow-gray-300'>
-                        {/* logo */}
                         <a href="" className='flex items-center gap-2'>
-                            <MdOutlineHouseboat className='text-white bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
+                            <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-xl'>FloatFind</span>
                         </a>
                         {
@@ -58,6 +67,12 @@ const IndexP = () => {
                             )
                         }
                     </header>
+                    
+                    {/* map the problems and make a card for each */}
+                    
+                    
+
+
                 </div>
             </div>
         </>
