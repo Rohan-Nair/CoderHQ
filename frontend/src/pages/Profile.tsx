@@ -4,8 +4,8 @@ import { GiSadCrab } from "react-icons/gi";
 import { useAuthStore, useUserPfpStore } from "../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuGroup, } from "../../@/components/ui/dropdown-menu";
-
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuGroup } from "../../@/components/ui/dropdown-menu";
+import { PiSignOut } from "react-icons/pi";
 
 const Profile = () => {
     const { user } = useAuthStore();
@@ -92,96 +92,80 @@ const Profile = () => {
                         </Link>
 
                         <div className='flex gap-2 justify-center items-center'>
-                            <button onClick={changeProfileImage}>temp</button>
                             <button onClick={() => navigate('/add')} className='bg-bground hover:bg-gray-200 text-pmain text-md border border-pmain font-medium py-2 px-2 rounded'>Add Question</button>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     {
                                         pfp ? (
-                                            < img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[40px] object-cover rounded-full" />
-                                        ) : <GiSadCrab className="w-8 h-8 text-black" />
-
+                                            <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[40px] object-cover rounded-full" />
+                                        ) : (
+                                            <div className="bg-pmainhover p-1 rounded-full">
+                                                <GiSadCrab className="w-8 h-8 text-black" />
+                                            </div>
+                                        )
                                     }
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-[20rem] mr-3 mt-3 md:w-[25rem] text-white bg-black p-10 pt-5">
-                                    <DropdownMenuLabel
-                                        className="w-full"
-                                    >
-                                        <p className='font-medium text-white text-center w-full text-2xl underline'>{user?.name}</p>
-                                    </DropdownMenuLabel>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuGroup className="flex w-full justify-center items-center">
-                                        <DropdownMenuItem>
-                                            {
-                                                pfp ? (
-                                                    <>
-                                                        <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
-                                                        <img src={`http://localhost:4000/uploads/${pfp}`} className=" aspect-square w-[120px] object-cover rounded-full" onClick={changeProfileImage} />
-                                                    </>
-                                                ) : (
-                                                    <div className='w-24 md:w-36 h-24 md:h-36 rounded-full bg-pmainhover flex justify-center items-center relative cursor-pointer' onClick={changeProfileImage}>
-                                                        <GiSadCrab className="w-12 h-12 text-black" />
-                                                    </div>
-                                                )
-                                            }
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <p><span className="font-bold text-pmain text-4xl">120</span> solved</p>
-                                        </DropdownMenuItem>
+                                <DropdownMenuContent className="w-[20rem] bg-black mt-3 mr-2 text-white p-3">
+                                    <DropdownMenuLabel className="text-xl text-center mt-1 mb-2">{user?.name}</DropdownMenuLabel>
+                                    <DropdownMenuSeparator color="white" />
+                                    <DropdownMenuGroup>
+                                        {
+                                            pfp ? (
+                                                <DropdownMenuItem className="flex flex-col">
+                                                    <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[120px] object-cover rounded-full" onClick={changeProfileImage} />
+                                                    <p onClick={changeProfileImage} className="hover:underline cursor-pointer">Change Profile Image</p>
+                                                </DropdownMenuItem>
+                                            ) : (
+                                                <DropdownMenuItem className="flex flex-col">
+                                                    <p onClick={changeProfileImage} className="hover:underline cursor-pointer">Add Profile Image</p>
+                                                </DropdownMenuItem>
+                                            )
+                                        }
                                     </DropdownMenuGroup>
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuGroup className="flex justify-center">
-                                        <DropdownMenuItem onClick={changeProfileImage}>
-                                            <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
-                                            <button onClick={changeProfileImage} className='bg-pmain hover:bg-pmainhover text-white text-md font-medium py-2 px-2 rounded'>Change Profile Image</button>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-white text-md font-medium py-2 px-2 rounded'>Logout</button>
-                                        </DropdownMenuItem>
-                                    </DropdownMenuGroup>
+                                    <DropdownMenuGroup className="flex flex-col items-center my-3">
+                                        <div className="flex flex-col items-center w-16 h-16 rounded-md bg-pmain text-black ">
+                                            <p className="text-3xl font-bold">130</p>
+                                            <p>solved</p>
+                                        </div>
 
+                                    </DropdownMenuGroup>
+                                    <DropdownMenuItem className="hover:outline-none outline-none border-none flex justify-center items-center mb-3">
+                                        <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-black text-md font-medium py-2 px-2 rounded flex justify-center items-center gap-2'>Logout<PiSignOut className="font-bold text-xl" /></button>
+                                    </DropdownMenuItem>
                                 </DropdownMenuContent>
+
                             </DropdownMenu>
-                            {/* <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-white text-md font-medium py-2 px-2 rounded'>Logout</button> */}
+
+
                         </div>
 
                     </header>
 
                     {/* display the user info */}
 
-                    <div className="w-full flex justify-center h-1/4">
-                        <div className='flex mt-3 border border-black bg-black text-white rounded-sm w-3/4 md:w-1/4'>
-                            {/* <div className='flex flex-col justify-center items-center bg-green-200 w-full gap-4'> */}
 
-                            <div className='flex items-center gap-2 text-xl p-2 relative w-full'>
-                                {
-                                    pfp ? (
+                    <div className='items-center gap-2 text-xl p-2 relative w-full hidden'>
+                        {
+                            pfp ? (
 
-                                        <>
-                                            <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
-                                            <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[120px] object-cover rounded-full" onClick={changeProfileImage} />
-                                        </>
+                                <>
+                                    <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
+                                    <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[120px] object-cover rounded-full" onClick={changeProfileImage} />
+                                </>
 
-                                    ) : (
+                            ) : (
 
-                                        <div className='w-24 md:w-36 h-24 md:h-36 rounded-full bg-pmainhover flex justify-center items-center relative cursor-pointer' onClick={changeProfileImage}>
-                                            <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
-                                            <GiSadCrab className="w-12 h-12 text-black" />
-                                        </div>
+                                <div className='w-24 md:w-36 h-24 md:h-36 rounded-full bg-pmainhover flex justify-center items-center relative cursor-pointer' onClick={changeProfileImage}>
+                                    <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
+                                    <GiSadCrab className="w-12 h-12 text-black" />
+                                </div>
 
-                                    )
-                                }
-                                {/* <div className="">
-                                    <span className='font-medium text-pmainhover text-xl underline'>{user?.name}</span>
-                                    <p onClick={() => { }} className="text-sm hover:underline hover:text-pmainhover cursor-pointer ">Edit Profile</p>
-                                    <p><span className="font-bold text-pmain">120</span> solved</p>
+                            )
+                        }
 
-                                </div> */}
-                            </div>
-                            {/* </div> */}
-
-                        </div>
                     </div>
+
                 </div >
             </div >
         </>
