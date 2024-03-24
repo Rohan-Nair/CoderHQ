@@ -28,3 +28,12 @@ interface ProblemsState {
 export const useProblemsStore = create<ProblemsState>(() => ({
     problems: [],
 }))
+
+
+interface userPfpState {
+    pfp: string
+}
+
+export const useUserPfpStore = create<userPfpState>(() => ({
+    pfp: ''
+}))

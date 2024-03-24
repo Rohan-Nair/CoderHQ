@@ -8,6 +8,7 @@ require('dotenv').config()
 // creating the app
 const app = express();
 
+
 // parsing json middleware
 app.use(express.json());
 
@@ -25,6 +26,9 @@ connect();
 
 // routes
 app.use('/api', routes);
+
+// temp
+app.use('/uploads', express.static('uploads'));
 
 // test route to be removed in production
 app.get('/api', (req, res) => {

@@ -51,10 +51,10 @@ const IndexP = () => {
             <div className='flex justify-center'>
                 <div className='max-w-[1920px] w-full'>
                     <header className='w-full flex justify-between items-center p-3 shadow-sm shadow-gray-300'>
-                        <a href="" className='flex items-center gap-2'>
+                        <Link to="/" className='flex items-center gap-2'>
                             <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-xl'>FloatFind</span>
-                        </a>
+                        </Link>
                         {
                             user ? (<div className='flex gap-2 justify-center items-center'>
                                 <Link to={"/profile"}>{user.name}</Link>
@@ -67,10 +67,10 @@ const IndexP = () => {
                             )
                         }
                     </header>
-                    
+
                     {/* map the problems and make a card for each */}
-                    
-                    
+
+
 
 
                 </div>

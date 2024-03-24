@@ -16,8 +16,8 @@ export const signup = async (req: Request, res: Response) => {
         name
     });
     if (usernameExists) {
-        res.status(202).json({ message: "Please choose a different username" }); 
-        return; 
+        res.status(202).json({ message: "Please choose a different username" });
+        return;
     }
     try {
         const salt = await bcryptjs.genSalt(10)
