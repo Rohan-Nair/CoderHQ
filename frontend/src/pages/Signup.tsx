@@ -42,13 +42,13 @@ const Signup = () => {
     return (
         <div>
             <div className='flex justify-center items-center h-screen bg-bground'>
-                <WavyBackground backgroundFill="#f8fefc">
-                    <div className='flex flex-col items-center justify-center gap-4 p-6 bg-gray-200 min-w-[20rem] min-h-[400px] shadow-lg rounded-lg'>
+                <WavyBackground backgroundFill="#101112">
+                    <div className='flex flex-col items-center justify-center gap-4 p-6 bg-crk min-w-[20rem] min-h-[400px] shadow-lg rounded-lg'>
                         <a href="" className='flex items-center gap-2'>
                             <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-3xl'>NikCode</span>
                         </a>
-                        <h1 className='text-2xl font-medium'>Signup</h1>
+                        <h1 className='text-2xl font-medium text-pmainhover'>Signup</h1>
                         <form className='flex flex-col gap-4 w-full' onSubmit={registerUser}>
                             <input
                                 value={name}
@@ -74,9 +74,9 @@ const Signup = () => {
                                 className='p-2 rounded-md bg-bground'
                                 required
                             />
-                            <button type="submit" className='bg-pmainhover hover:bg-pmainhover text-white font-medium py-2 rounded-md'>{loading ? <ClipLoader color="#fff" size={24} /> : "Register Now"}</button>
+                            <button type="submit" className='bg-pmainhover hover:bg-pmainhover text-white font-medium py-2 rounded-md'>{loading ? <ClipLoader color="#000" size={24} /> : "Register Now"}</button>
                         </form>
-                        <p className="text-center">Already have an account? <Link className="text-pmainhover font-medium hover:underline" to={"/login"}>Login</Link></p>
+                        <p className="text-center text-white">Already have an account? <Link className="text-pmainhover font-medium hover:underline" to={"/login"}>Login</Link></p>
                     </div>
                 </WavyBackground>
             </div>

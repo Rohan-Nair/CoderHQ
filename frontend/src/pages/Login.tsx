@@ -40,14 +40,14 @@ const Login = () => {
     return (
         <div>
             <div className='flex justify-center items-center h-screen bg-bground'>
-                <WavyBackground backgroundFill="#f8fefc">
+                <WavyBackground backgroundFill="#101112">
 
-                    <div className='flex flex-col items-center justify-center gap-4 p-6 bg-gray-200 min-w-[20rem] min-h-[400px] shadow-lg rounded-lg'>
+                    <div className='flex flex-col items-center justify-center gap-4 p-6 bg-crk min-w-[20rem] min-h-[400px] shadow-lg rounded-lg'>
                         <a href="" className='flex items-center gap-2'>
                             <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-3xl'>FloatFind</span>
                         </a>
-                        <h1 className='text-2xl font-medium'>Login</h1>
+                        <h1 className='text-2xl font-medium text-pmainhover'>Login</h1>
                         <form className='flex flex-col gap-4 w-full' onSubmit={login}>
                             <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder='Email' className='p-2 rounded-md bg-bground' />
                             <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' className='p-2 rounded-md bg-bground' />

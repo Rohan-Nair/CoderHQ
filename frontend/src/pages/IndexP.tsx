@@ -48,27 +48,50 @@ const IndexP = () => {
 
     return (
         <>
-            <div className='flex justify-center'>
+            <div className='flex justify-center h-screen bg-bground'>
                 <div className='max-w-[1920px] w-full'>
-                    <header className='w-full flex justify-between items-center p-3 shadow-sm shadow-gray-300'>
+                    <header className='w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
                         <Link to="/" className='flex items-center gap-2'>
                             <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
                             <span className='font-medium font-sans text-xl'>FloatFind</span>
                         </Link>
                         {
-                            user ? (<div className='flex gap-2 justify-center items-center'>
+                            user ? (<div className='flex gap-2 justify-center items-center text-amain'>
                                 <Link to={"/profile"}>{user.name}</Link>
-                                <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Logout</button>
+                                <button onClick={logoutFunction} className='bg-amain hover:bg-amainhover text-mainbl font-medium py-2 px-4 rounded'>Logout</button>
                             </div>) : (
                                 <div className='flex gap-2'>
-                                    <Link to={"/login"} className='bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Login</Link>
-                                    <Link to={"/signup"} className='hidden sm:block bg-pmain hover:bg-pmainhover text-white font-medium py-2 px-4 rounded'>Signup</Link>
+                                    <Link to={"/login"} className='bg-amain hover:bg-amainhover text-mainbl font-medium py-2 px-4 rounded'>Login</Link>
+                                    <Link to={"/signup"} className='hidden sm:block bg-amain hover:bg-amainhover text-crk font-medium py-2 px-4 rounded'>Signup</Link>
                                 </div>
                             )
                         }
                     </header>
 
-                    {/* map the problems and make a card for each */}
+                    <section className="mt-[5.5rem] h-full pt-2 px-2 md:w-[50rem] md:h-[40rem] rounded-md border-2 border-amain bg-mainbl mx-auto overflow-y-auto">
+
+
+                        {
+                            problems.map((singleproblem: any) => {
+                                return (
+                                    <div className='flex flex-col gap-2 p-2 m-3 bg-crk rounded-md'>
+                                        <div className='flex justify-between items-center gap-2'>
+                                            <div className='flex items-center justify-center gap-2'>
+                                                <span className='text-amain font-bold'>{singleproblem.title}</span>
+                                                <span className='text-md text-white'>by {singleproblem.name}</span>
+                                            </div>
+                                            <Link to={`/problem/${singleproblem._id}`} className='bg-smain hover:bg-amain text-black font-semibold py-2 px-4 rounded'>Solve</Link>
+                                        </div>
+                                    </div>
+
+                                )
+                            })
+                        }
+                    </section>
+
+
+
+
 
 
 

@@ -20,12 +20,16 @@ module.exports = {
     extend: {
       colors: {
         'txt': "#000",
-        'bground': '#f8fefc',
+        'bround': '#f8fefc',
         'pmain': '#30d4aa',
         'smain': '#93d8e8',
         'amain': '#6ba8e0',
         'white': '#fff',
         'pmainhover': '#239679',
+        "mainbl": "#1a1a1a",
+        "crk": "#363636",
+        "bground": "#101112",
+        "amainhover": "#4b749b",
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

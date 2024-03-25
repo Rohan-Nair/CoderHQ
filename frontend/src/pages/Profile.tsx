@@ -92,22 +92,21 @@ const Profile = () => {
                         </Link>
 
                         <div className='flex gap-2 justify-center items-center'>
-                            <button onClick={() => navigate('/add')} className='bg-bground hover:bg-gray-200 text-pmain text-md border border-pmain font-medium py-2 px-2 rounded'>Add Question</button>
+                            <button onClick={() => navigate('/add')} className='bg-amain hover:bg-amainhover text-mainbl text-md border-none font-medium py-2 px-2 rounded'>Add Question</button>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     {
                                         pfp ? (
                                             <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[40px] object-cover rounded-full" />
                                         ) : (
-                                            <div className="bg-pmainhover p-1 rounded-full">
+                                            <div className="bg-amainhover p-1 rounded-full">
                                                 <GiSadCrab className="w-8 h-8 text-black" />
                                             </div>
                                         )
                                     }
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-[20rem] bg-black mt-3 mr-2 text-white p-3">
+                                <DropdownMenuContent className="w-[20rem] bg-mainbl mt-4 border-none mr-2 text-white p-3">
                                     <DropdownMenuLabel className="text-xl text-center mt-1 mb-2">{user?.name}</DropdownMenuLabel>
-                                    <DropdownMenuSeparator color="white" />
                                     <DropdownMenuGroup>
                                         {
                                             pfp ? (
@@ -122,16 +121,15 @@ const Profile = () => {
                                             )
                                         }
                                     </DropdownMenuGroup>
-                                    <DropdownMenuSeparator />
                                     <DropdownMenuGroup className="flex flex-col items-center my-3">
-                                        <div className="flex flex-col items-center w-16 h-16 rounded-md bg-pmain text-black ">
+                                        <div className="flex flex-col items-center w-16 h-16 rounded-md bg-crk text-amain ">
                                             <p className="text-3xl font-bold">130</p>
                                             <p>solved</p>
                                         </div>
 
                                     </DropdownMenuGroup>
                                     <DropdownMenuItem className="hover:outline-none outline-none border-none flex justify-center items-center mb-3">
-                                        <button onClick={logoutFunction} className='bg-pmain hover:bg-pmainhover text-black text-md font-medium py-2 px-2 rounded flex justify-center items-center gap-2'>Logout<PiSignOut className="font-bold text-xl" /></button>
+                                        <button onClick={logoutFunction} className='bg-amain hover:bg-amainhover text-black text-md font-medium py-2 px-2 rounded flex justify-center items-center gap-2'>Logout<PiSignOut className="font-bold text-xl" /></button>
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
 
