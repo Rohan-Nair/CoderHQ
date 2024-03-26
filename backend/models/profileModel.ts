@@ -13,9 +13,17 @@ const profileSchema = new mongoose.Schema({
         required: false,
         unique: false
     },
-    githubUrl: {
+    email: {
         type: String,
-        required: false,
-        unique: false
+        required: true,
+        unique: true,
     },
+    name: {
+        type: String,
+        required: true,
+        unique: false,
+    }
 })
+
+const ProfileModel = mongoose.models.ProfileModel || mongoose.model("Profile", profileSchema);
+export default ProfileModel;

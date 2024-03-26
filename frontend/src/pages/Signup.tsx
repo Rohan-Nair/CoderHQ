@@ -55,7 +55,7 @@ const Signup = () => {
                                 onChange={(e) => setName(e.target.value)}
                                 type="text"
                                 placeholder='Name'
-                                className='p-2 rounded-md bg-bground'
+                                className='p-2 rounded-md bg-bground text-white'
                                 required
                             />
                             <input
@@ -63,7 +63,7 @@ const Signup = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 type="text"
                                 placeholder='Email'
-                                className='p-2 rounded-md bg-bground'
+                                className='p-2 rounded-md bg-bground text-white'
                                 required
                             />
                             <input
@@ -71,7 +71,7 @@ const Signup = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 type="password"
                                 placeholder='Password'
-                                className='p-2 rounded-md bg-bground'
+                                className='p-2 rounded-md bg-bground text-white'
                                 required
                             />
                             <button type="submit" className='bg-pmainhover hover:bg-pmainhover text-white font-medium py-2 rounded-md'>{loading ? <ClipLoader color="#000" size={24} /> : "Register Now"}</button>

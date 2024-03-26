@@ -62,6 +62,7 @@ const Profile = () => {
         console.log("fileupload fn")
         const file = e.target.files[0];
         const formData = new FormData();
+        formData.set('udetails', JSON.stringify(user));
         formData.set('pfp', file);
 
         const response = await axios.post('/upload', formData, {
