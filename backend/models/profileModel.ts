@@ -13,16 +13,20 @@ const profileSchema = new mongoose.Schema({
         required: false,
         unique: false
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     name: {
         type: String,
-        required: true,
-        unique: false,
-    }
+        required: [true, "Please provide a username"],
+        unique: true,
+    },
+    email: {
+        type: String,
+        required: [true, "Please provide a email"],
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: [true, "Please provide a password"],
+    },
 })
 
 const ProfileModel = mongoose.models.ProfileModel || mongoose.model("Profile", profileSchema);

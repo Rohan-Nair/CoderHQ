@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
-import UserModel from "../models/userModel";
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken';
+import ProfileModel from "../models/profileModel";
 
 export const signup = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
-    const userExists = await UserModel.findOne({
+    const userExists = await ProfileModel.findOne({
         email
     });
     if (userExists) {
         res.status(201).json({ message: "User already exists" });
         return;
     }
-    const usernameExists = await UserModel.findOne({
+    const usernameExists = await ProfileModel.findOne({
         name
     });
     if (usernameExists) {
@@ -22,10 +22,12 @@ export const signup = async (req: Request, res: Response) => {
     try {
         const salt = await bcryptjs.genSalt(10)
         const hashedpwd = await bcryptjs.hash(password, salt)
-        const userDoc = await UserModel.create({
+        await ProfileModel.create({
             name,
             email,
-            password: hashedpwd
+            password: hashedpwd,
+            pfpUrl: "",
+            problemsSolved: 0,
         });
         res.status(200).json({ message: "User created successfully" });
     } catch (e: any) {
@@ -36,10 +38,12 @@ export const signup = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    const user = await UserModel.findOne({
+    console.log(email, password);
+    const user = await ProfileModel.findOne({
         email
     });
     if (!user) {
+        console.log("user not found");
         res.status(404).json({ message: "User not found" });
         return;
     }
@@ -69,15 +73,23 @@ export const getUser = async (req: Request, res: Response) => {
             return;
         }
         const verified = jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload;
-        const user = await UserModel.findOne({
+        const user = await ProfileModel.findOne({
             email: verified.email,
         });
+        if (!user) {
+            res.status(201).json({ message: "Unauthorized" });
+            return;
+        }
+        console.log(user);
         const info = {
             name: user.name,
-            email: user.email
+            email: user.email,
+            pfpUrl: user.pfpUrl,
+            problemsSolved: user.problemsSolved
         }
         res.status(200).json({ info });
     } catch (e: any) {
+        console.log(e);
         res.status(500).json({ message: "error" });
     }
 }

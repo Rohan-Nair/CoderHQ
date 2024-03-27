@@ -4,7 +4,7 @@ import { GiSadCrab } from "react-icons/gi";
 import { useAuthStore, useUserPfpStore } from "../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuGroup } from "../../@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuGroup } from "../../@/components/ui/dropdown-menu";
 import { PiSignOut } from "react-icons/pi";
 
 const Profile = () => {
@@ -25,8 +25,17 @@ const Profile = () => {
                     }
                 }
                 if (response.status === 200) {
-                    useAuthStore.setState({ user: response.data.info })
+                    const info = response.data.info;
+                    useAuthStore.setState({
+                        user: {
+                            name: info.name,
+                            email: info.email,
+                            pfp: info.pfpUrl
+                        }
+                    })
                 }
+                console.log(user);
+
             }
         )()
     }, [])
@@ -49,8 +58,9 @@ const Profile = () => {
     const fileipref = useRef<HTMLInputElement>(null);
 
     // function for when the profile image is clicked
-    const changeProfileImage = async () => {
+    const changeProfileImage = () => {
         console.log("changeProfileImage fn")
+        console.log(fileipref.current)
         if (fileipref.current) {
             fileipref.current.click();
             console.log("cp")
@@ -97,8 +107,8 @@ const Profile = () => {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     {
-                                        pfp ? (
-                                            <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[40px] object-cover rounded-full" />
+                                        user?.pfp ? (
+                                            <img src={user.pfp} alt="" className=" aspect-square w-[40px] object-cover rounded-full" />
                                         ) : (
                                             <div className="bg-amainhover p-1 rounded-full">
                                                 <GiSadCrab className="w-8 h-8 text-black" />
@@ -110,13 +120,18 @@ const Profile = () => {
                                     <DropdownMenuLabel className="text-xl text-center mt-1 mb-2">{user?.name}</DropdownMenuLabel>
                                     <DropdownMenuGroup>
                                         {
-                                            pfp ? (
+                                            user?.pfp ? (
                                                 <DropdownMenuItem className="flex flex-col">
-                                                    <img src={`http://localhost:4000/uploads/${pfp}`} alt="" className=" aspect-square w-[120px] object-cover rounded-full" onClick={changeProfileImage} />
-                                                    <p onClick={changeProfileImage} className="hover:underline cursor-pointer">Change Profile Image</p>
+                                                    <div onClick={changeProfileImage}>
+                                                        <img src={user.pfp} alt="" className=" aspect-square w-[120px] object-cover rounded-full" onClick={changeProfileImage} />
+                                                        <p onClick={changeProfileImage} className="hover:underline cursor-pointer">Change Profile Image</p>
+                                                        {/* <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} /> */}
+                                                    </div>
+                                                    {/* <p>hello world</p> */}
                                                 </DropdownMenuItem>
                                             ) : (
                                                 <DropdownMenuItem className="flex flex-col">
+                                                    <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
                                                     <p onClick={changeProfileImage} className="hover:underline cursor-pointer">Add Profile Image</p>
                                                 </DropdownMenuItem>
                                             )

@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import axios from 'axios';
 import Profile from './pages/Profile';
 import Add from './pages/Add';
+import Pfile from './pages/Pfile';
 
 axios.defaults.baseURL = 'http://localhost:4000/api';
 
@@ -16,7 +17,7 @@ function App() {
       <Route index element={<IndexP />} />
       <Route path="/login" element={<Login />} />
       <Route path='/signup' element={<Signup />} />
-      <Route path='/profile' element={<Profile />} />
+      <Route path='/profile' element={<Pfile />} />
       <Route path='/add' element={<Add />} />
     </Routes>
   )

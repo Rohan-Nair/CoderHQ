@@ -4,7 +4,7 @@ interface AuthState {
     user: {
         name: string,
         email: string,
-        pfp: string
+        pfp: string,
     } | null,
 
 

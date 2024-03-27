@@ -29,27 +29,29 @@ interface requestincoming extends Request {
 // }
 
 export const uploadController = async (req: Request, res: Response, next: NextFunction) => {
-    // console.log(req);
+    const udetails = JSON.parse(req.body.udetails);
     const localfilepath = req.file!.path;
     try {
-        // upload to cloudinary here
-        const pfpUrlCloudinary = await uploadToCloudinary(localfilepath);
-        const checkifProfilePhotoexists = await ProfileModel.findOne({ email: req.body.udetails.email });
+        const checkifProfilePhotoexists = await ProfileModel.findOne({ email: udetails.email });
         if (checkifProfilePhotoexists) {
-            await ProfileModel.findOneAndUpdate({ email: req.body.udetails.email }, { pfp: pfpUrlCloudinary });
+            // upload to cloudinary here
+            const pfpUrlCloudinary = await uploadToCloudinary(localfilepath);
+            await ProfileModel.findOneAndUpdate({ email: udetails.email }, { pfpUrl: pfpUrlCloudinary });
+            const updatedProfile = await ProfileModel.findOne({ email: udetails.email });
+            const updatedProfileData = {
+                name: updatedProfile.name,
+                email: updatedProfile.email,
+                pfpUrl: updatedProfile.pfpUrl
+            }
+            res.status(200).json({ updatedProfileData });
         } else {
-            await ProfileModel.create({
-                email: req.body.udetails.email,
-                pfp: pfpUrlCloudinary, 
-                name: req.body.udetails.name, 
-                problemsSolved: 0
-            });
+            res.status(401).json({ error: "Couldn't find the user" });
+            return;
         }
-        console.log("file uploaded successfully to cloudinary");
     } catch (e) {
         console.error(e); // Log the error
-        fs.unlinkSync(localfilepath);
         return res.status(500).json({ error: "Something went wrong" });
+    } finally {
+        fs.unlinkSync(localfilepath);
     }
-    res.json({ message: "Profile Image Updated" });
 }

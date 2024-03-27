@@ -20,17 +20,22 @@ const Login = () => {
                 email,
                 password
             }, { withCredentials: true })
+            console.log(response);
             if (response.status === 200) {
                 toast.success("Logged in successfully");
                 navigate('/');
-            } else if (response.status === 404) {
-                toast.error("You need to signup first");
-                navigate('/signup');
-            } else if (response.status === 401) {
-                toast.error("Invalid credentials");
+            } else {
+                toast.error("Something went wrong");
             }
         } catch (e: any) {
-            toast.error("Something went wrong");
+            if (e.response.status === 404) {
+                toast.error("You need to signup first");
+                navigate('/signup');
+            } else if (e.response.status === 401) {
+                toast.error("Invalid credentials");
+            } else {
+                toast.error("Something went wrong");
+            }
         } finally {
             setLoading(false)
         }
