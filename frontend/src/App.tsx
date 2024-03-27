@@ -4,7 +4,6 @@ import IndexP from './pages/IndexP';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import axios from 'axios';
-import Profile from './pages/ProfileDump';
 import Add from './pages/Add';
 import Pfile from './pages/Profile';
 
