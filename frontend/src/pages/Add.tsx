@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { GiSadCrab } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/store";
 import logo from "../assets/logo.png";

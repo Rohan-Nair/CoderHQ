@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthStore } from "../store/store";
 import { Link, useNavigate } from "react-router-dom";
-import { GiSadCrab } from "react-icons/gi";
 import { PiSignOut } from "react-icons/pi";
 import logo from "../assets/logo.png";
 import { HomeIcon } from "@radix-ui/react-icons";

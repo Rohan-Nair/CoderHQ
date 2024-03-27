@@ -1,10 +1,8 @@
-import { GiSadCrab } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners"
-import { WavyBackground } from "../components/ui/Wavy";
 import logo from "../assets/logo.png";
 const Login = () => {
     const [email, setEmail] = useState('')
