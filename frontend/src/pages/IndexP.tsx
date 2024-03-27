@@ -4,6 +4,7 @@ import { GiSadCrab } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore, useProblemsStore } from "../store/store";
 import toast from "react-hot-toast";
+import logo from "../assets/logo.png";
 const IndexP = () => {
     const { user } = useAuthStore();
     const { problems } = useProblemsStore();
@@ -51,9 +52,9 @@ const IndexP = () => {
             <div className='flex justify-center h-screen bg-bground'>
                 <div className='max-w-[1920px] w-full'>
                     <header className='w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
-                        <Link to="/" className='flex items-center gap-2'>
-                            <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
-                            <span className='font-medium font-sans text-xl'>FloatFind</span>
+                        <Link to={"/"} className='flex items-center gap-2 outline-none'>
+                            <img src={logo} className="w-12 h-12" />
+                            <span className='font-medium font-sans text-3xl text-white'>CoderHQ</span>
                         </Link>
                         {
                             user ? (<div className='flex gap-2 justify-center items-center text-amain'>

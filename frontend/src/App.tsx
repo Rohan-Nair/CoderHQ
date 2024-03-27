@@ -4,9 +4,9 @@ import IndexP from './pages/IndexP';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import axios from 'axios';
-import Profile from './pages/Profile';
+import Profile from './pages/ProfileDump';
 import Add from './pages/Add';
-import Pfile from './pages/Pfile';
+import Pfile from './pages/Profile';
 
 axios.defaults.baseURL = 'http://localhost:4000/api';
 

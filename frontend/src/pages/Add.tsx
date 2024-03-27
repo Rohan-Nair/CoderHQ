@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { GiSadCrab } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/store";
+import logo from "../assets/logo.png";
 
 const Add = () => {
     const { user } = useAuthStore();
@@ -81,9 +82,9 @@ const Add = () => {
             <div className='flex justify-center'>
                 <div className='max-w-[1920px] w-full h-screen flex flex-col items-center bg-bground'>
                     <header className='w-full flex justify-between items-center p-3 shadow-sm shadow-gray-300'>
-                        <Link to={"/"} className='flex items-center gap-2'>
-                            <GiSadCrab className='text-black bg-pmain flex justify-center items-center rounded-lg w-12 h-12' />
-                            <span className='font-medium font-sans text-xl'>FloatFind</span>
+                        <Link to={"/"} className='flex items-center gap-2 outline-none'>
+                            <img src={logo} className="w-12 h-12" />
+                            <span className='font-medium font-sans text-3xl text-white'>CoderHQ</span>
                         </Link>
 
                         <div className='flex gap-2 justify-center items-center'>
@@ -93,7 +94,7 @@ const Add = () => {
 
                     </header>
 
-                    <div className='w-1/2 flex flex-col justify-center items-center gap-4 mt-10 py-10 rounded-md  shadow-lg bg-crk'>
+                    <div className=' w-11/12 sm:w-1/2 flex flex-col justify-center items-center gap-4 mt-10 py-10 px-5 rounded-md  shadow-lg bg-crk'>
                         <p className="font-medium text-xl underline text-amain">Add a new question</p>
                         <form className='flex flex-col gap-4 w-full max-w-[500px]' onSubmit={addQuestion}>
                             <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder='Title' className='w-full p-2 rounded bg-bground text-amain' />
