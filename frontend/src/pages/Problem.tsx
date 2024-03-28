@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/logo.png"
 import Splitter, { SplitDirection } from "@devbookhq/splitter";
+import CodeEditor from "../components/CodeEditor";
 
 interface ProblemType {
     description: string,
@@ -87,7 +88,9 @@ const Problem = () => {
                                     </div>
                                 </Splitter>
                             </Splitter>
-                            <div>Tile 1</div>
+                            <div className="bg-mainbl h-full">
+                                <CodeEditor />
+                            </div>
                         </Splitter>
 
                     </section>
