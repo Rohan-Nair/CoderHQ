@@ -1,7 +1,7 @@
 const router = require('express').Router();
 import { Request, Response } from "express";
 import { getUser, login, logout, signup } from "../controllers/authController";
-import { addProblem, getProblems } from "../controllers/problemController";
+import { addProblem, getProblems, getSingleProblem } from "../controllers/problemController";
 import { uploadController } from "../controllers/userController";
 // import { upload } from "../middleware/multer.middleware";
 // import multer from "multer";
@@ -21,6 +21,8 @@ router.post('/logout', logout);
 router.post('/add', addProblem);
 
 router.get('/problems', getProblems);
+
+router.get('/problems/:id', getSingleProblem)
 
 // user pfp route 
 // photos middleware 

@@ -80,7 +80,6 @@ export const getUser = async (req: Request, res: Response) => {
             res.status(201).json({ message: "Unauthorized" });
             return;
         }
-        console.log(user);
         const info = {
             name: user.name,
             email: user.email,

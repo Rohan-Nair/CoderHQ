@@ -36,3 +36,12 @@ export const getProblems = async (req: Request, res: Response) => {
     }
 }
 
+export const getSingleProblem = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const problem = await ProblemModel.findById(id);
+        res.status(200).json({ problem });
+    } catch (err) {
+        res.status(400).json({ message: "Something went wrong" });
+    }
+}
