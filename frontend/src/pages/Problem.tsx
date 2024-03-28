@@ -16,7 +16,13 @@ interface ProblemType {
 
 const Problem = () => {
     const { problemId } = useParams();
-    const [problem, setProblem] = useState<ProblemType>({});
+    const [problem, setProblem] = useState<ProblemType>({
+        description: "",
+        input: "",
+        name: "",
+        output: "",
+        title: ""
+    });
     const navigate = useNavigate();
     useEffect(() => {
         const fetchProblem = async () => {
