@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "strict": true
+    },
+    "include": [
+        "./**/*.ts",
+        "./middleware/multer.middleware.ts"
+    ],
+    "exclude": [
+        "./dump.ts"
+    ]
+}
