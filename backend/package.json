@@ -1,9 +1,15 @@
 {
   "scripts": {
     "dev": "nodemon index.ts",
-    "build": "tsc",
-    "vercel-build": "echo hello"
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json ",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.0.3",
