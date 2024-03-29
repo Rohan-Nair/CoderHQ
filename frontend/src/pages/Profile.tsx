@@ -90,7 +90,7 @@ const Profile = () => {
         <>
             <div className="flex justify-center h-screen bg-mainbl">
                 <div className='max-w-[1920px] w-full '>
-                    <header className='bg-bground w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
+                    <header className='bg-bground w-full max-w-[1920px] h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
                         <Link to={"/"} className='flex items-center gap-2 outline-none'>
                             {/* <GiSadCrab className='text-black bg-amain flex justify-center items-center rounded-lg w-12 h-12' /> */}
                             <img src={logo} className="w-12 h-12" />

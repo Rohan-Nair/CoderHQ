@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "dev": "nodemon index.ts",
+    "build": "tsc",
+    "vercel-build": "echo hello"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.0.3",

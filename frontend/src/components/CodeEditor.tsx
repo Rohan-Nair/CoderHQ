@@ -20,7 +20,6 @@ const CodeEditor = () => {
         <div className="flex flex-col lg:flex-row h-full">
             <div className="w-[100vw] px-3 lg:w-full">
                 <div className="my-2">
-
                     <LangSelect lang={language} onSelect={onSelectLanguage} />
                 </div>
                 <Editor

@@ -50,7 +50,7 @@ const IndexP = () => {
         <>
             <div className='flex justify-center h-screen bg-bground'>
                 <div className='max-w-[1920px] w-full'>
-                    <header className='w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
+                    <header className='w-full max-w-[1920px] h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
                         <Link to={"/"} className='flex items-center gap-2 outline-none'>
                             <img src={logo} className="w-12 h-12" />
                             <span className='font-medium font-sans text-3xl text-white'>CoderHQ</span>
@@ -74,7 +74,7 @@ const IndexP = () => {
                         {
                             problems.map((singleproblem: any) => {
                                 return (
-                                    <div className='flex flex-col gap-2 p-2 m-3 bg-crk rounded-md'>
+                                    <div key={singleproblem._id} className='flex flex-col gap-2 p-2 m-3 bg-crk rounded-md'>
                                         <div className='flex justify-between items-center gap-2'>
                                             <div className='flex items-center justify-center gap-2'>
                                                 <span className='text-amain font-bold'>{singleproblem.title}</span>

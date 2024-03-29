@@ -49,8 +49,8 @@ const Problem = () => {
     return (
         <>
             <div className="flex justify-center h-screen bg-mainbl">
-                <div className='max-w-[1920px] w-full '>
-                    <header className='bg-bground w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
+                <div className='max-w-[1920px] w-full'>
+                    <header className='bg-bground max-w-[1920px] w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
                         <Link to={"/"} className='flex items-center gap-2 outline-none'>
                             <img src={logo} className="w-12 h-12" />
                             <span className='font-medium font-sans text-3xl text-white'>CoderHQ</span>
@@ -62,7 +62,7 @@ const Problem = () => {
                         </div>
                     </header>
 
-                    <section className="mt-[5.5rem] h-full py-2 px-2 md:w-full md:h-[40rem] rounded-md border-2 border-amain bg-mainbl mx-auto overflow-y-auto">
+                    <section className="hidden sm:block mt-[5.5rem] h-full py-2 px-2 md:w-full md:h-[40rem] rounded-md border-2 border-amain bg-mainbl mx-auto overflow-y-auto">
                         <Splitter direction={SplitDirection.Horizontal} >
                             <Splitter direction={SplitDirection.Vertical}>
                                 <div className="text-white h-full overflow-y-auto">

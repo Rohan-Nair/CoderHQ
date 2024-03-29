@@ -28,7 +28,7 @@ const LangSelect: React.FC<LangSelectProps> = ({ lang, onSelect }) => {
         // </Select>
 
         <Select onValueChange={onSelect}>
-            <SelectTrigger className="bg-amain w-32 outline-none border-none">
+            <SelectTrigger className="bg-amain w-32 outline-none border-none font-semibold">
                 <SelectValue placeholder={lang} />
             </SelectTrigger>
             <SelectContent>

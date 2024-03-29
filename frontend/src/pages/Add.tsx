@@ -78,8 +78,8 @@ const Add = () => {
 
     return (
         <>
-            <div className='flex justify-center'>
-                <div className='max-w-[1920px] w-full h-screen flex flex-col items-center bg-bground'>
+            <div className='flex justify-center bg-mainbl'>
+                <div className='max-w-[1920px] w-full h-screen flex flex-col items-center'>
                     <header className='w-full flex justify-between items-center p-3 shadow-sm shadow-gray-300'>
                         <Link to={"/"} className='flex items-center gap-2 outline-none'>
                             <img src={logo} className="w-12 h-12" />
