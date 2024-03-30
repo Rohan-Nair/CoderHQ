@@ -8,9 +8,10 @@ import { uploadController } from "../controllers/userController";
 import { upload } from "../middleware/multer.middleware";
 require('dotenv').config()
 
-
-router.get('/', async (req: Request, res: Response) => res.json) // this is a test route to be removed in production
-
+// test route to be removed in production
+router.get('/test', (req: Request, res: Response) => {
+    res.send('Hello yadav ji');
+});
 
 // auth routes
 router.post('/signup', signup);
@@ -33,8 +34,5 @@ router.get('/problems/:id', getSingleProblem)
 // const photosMiddleware = multer({ dest: 'uploads/' });
 // router.post('/upload', photosMiddleware.single('pfp'), uploadController);
 router.post('/upload', upload.single('pfp'), uploadController);
-
-
-// test routes
 
 export default router;

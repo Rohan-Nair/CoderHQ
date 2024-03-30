@@ -17,16 +17,12 @@ app.use(cookieParser());
 
 // cors middleware (need to change origin to frontend url in production)
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://coderhq.vercel.app"],
     credentials: true,
 }));
 
 // connecting to the database
 connect();
-
-// app.use('/', async (req, res) => {
-//     res.json('Hello World');
-// })
 
 // routes
 app.use('/api', routes);
@@ -34,10 +30,11 @@ app.use('/api', routes);
 // temp
 app.use('/uploads', express.static('uploads'));
 
-// test route to be removed in production
-app.get('/api', (req, res) => {
-    res.send('Hello yadav ji');
-});
+
+// this is a test route to check if server is running
+app.use('/', async (req, res) => {
+    res.json('Hello World');
+})
 
 // starting the server
 app.listen(4000, () => {
