@@ -24,9 +24,9 @@ app.use(cors({
 // connecting to the database
 connect();
 
-app.use('/', async (req, res) => {
-    res.json('Hello World');
-})
+// app.use('/', async (req, res) => {
+//     res.json('Hello World');
+// })
 
 // routes
 app.use('/api', routes);
