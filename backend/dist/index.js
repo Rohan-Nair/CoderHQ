@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -17,22 +26,19 @@ app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 // cors middleware (need to change origin to frontend url in production)
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://coderhq.vercel.app"],
     credentials: true,
 }));
 // connecting to the database
 (0, dbConfig_1.connect)();
-// app.use('/', async (req, res) => {
-//     res.json('Hello World');
-// })
 // routes
 app.use('/api', routes_1.default);
 // temp
 app.use('/uploads', express_1.default.static('uploads'));
-// test route to be removed in production
-app.get('/api', (req, res) => {
-    res.send('Hello yadav ji');
-});
+// this is a test route to check if server is running
+app.use('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.json('Hello World');
+}));
 // starting the server
 app.listen(4000, () => {
     // test message to check if server is running (to be removed in production)
