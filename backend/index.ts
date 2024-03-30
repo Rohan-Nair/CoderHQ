@@ -24,7 +24,7 @@ app.use(cors({
 // connecting to the database
 connect();
 
-app.use('/', async (req,res) => {
+app.use('/', async (req, res) => {
     res.json('Hello World');
 })
 
@@ -36,7 +36,7 @@ app.use('/uploads', express.static('uploads'));
 
 // test route to be removed in production
 app.get('/api', (req, res) => {
-    res.send('Hello World');
+    res.send('Hello yadav ji');
 });
 
 // starting the server
