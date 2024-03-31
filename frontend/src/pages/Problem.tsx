@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/logo.png"
 import Splitter, { SplitDirection } from "@devbookhq/splitter";
 import CodeEditor from "../components/CodeEditor";
+import { useAuthStore } from "../store/store";
 
 interface ProblemType {
     description: string,
@@ -25,12 +26,47 @@ const Problem = () => {
         title: ""
     });
     const navigate = useNavigate();
+    const { user } = useAuthStore();
+
+    const [ipValue, setIpValue] = useState<string>("");
+    const [opValue, setOpValue] = useState<string>("");
+
+    // checking if user has logged in or not
     useEffect(() => {
+        (
+            async () => {
+                const response = await axios.get('/user', { withCredentials: true });
+                if (response.status === 201) {
+                    useAuthStore.setState({ user: null })
+                    if (!user) {
+                        toast.error("You need to login first");
+                        navigate('/login')
+                    }
+                }
+                if (response.status === 200) {
+                    useAuthStore.setState({
+                        user: {
+                            name: response.data.info.name,
+                            email: response.data.info.email,
+                            pfp: response.data.info.pfpUrl
+                        }
+                    })
+                }
+            }
+        )()
+    }, [])
+
+    useEffect(() => {
+        if (!problemId) {
+            navigate('/');
+        }
         const fetchProblem = async () => {
             try {
                 const response = await axios.get(`/problems/${problemId}`);
                 if (response.status === 200) {
                     setProblem(response.data.problem);
+                    setIpValue(response.data.problem.input);
+                    setOpValue(response.data.problem.output);
                 }
             } catch (e: any) {
                 if (e.response.status === 400) {
@@ -46,6 +82,8 @@ const Problem = () => {
             <div>Loading...</div>
         )
     }
+
+
     return (
         <>
             <div className="flex justify-center h-screen bg-mainbl">
@@ -62,7 +100,8 @@ const Problem = () => {
                         </div>
                     </header>
 
-                    <section className="hidden sm:block mt-[5.5rem] h-full py-2 px-2 md:w-full md:h-[40rem] rounded-md border-2 border-amain bg-mainbl mx-auto overflow-y-auto">
+                    {/* this is the layout for the larger screens smaller screen design yet to be made */}
+                    <section className="hidden sm:block mt-[5.5rem] h-full py-2 px-2 md:w-full md:h-[40rem] rounded-md border-none bg-mainbl mx-auto overflow-y-auto">
                         <Splitter direction={SplitDirection.Horizontal} >
                             <Splitter direction={SplitDirection.Vertical}>
                                 <div className="text-white h-full overflow-y-auto">
@@ -71,25 +110,41 @@ const Problem = () => {
                                         <button onClick={() => navigate('/')} className='bg-amain hover:bg-amainhover text-mainbl text-md border-none font-medium py-2 px-2 rounded'>All Problems</button>
                                     </div>
                                     <p className="p-2">Contributed by <span className="text-amain text-md">{problem.name}</span></p>
-                                    <div className="text-xl font-mono text-white p-2">
-                                        {problem.description}
+                                    <div className="text-lg font-sans text-white p-2">
+                                        <p>{problem.description}</p>
+                                        <br />
+                                        <p className="font-mono">
+                                            Sample input:
+                                            <br />
+                                            <p className="bg-crk rounded-md p-2">
+                                                {problem.input}
+                                            </p>
+                                        </p>
+                                        <br />
+                                        <p className="font-mono">
+                                            Sample output:
+                                            <br />
+                                            <p className="bg-crk rounded-md p-2">
+                                                {problem.output}
+                                            </p>
+                                        </p>
                                     </div>
                                 </div>
                                 <Splitter direction={SplitDirection.Vertical}>
                                     <div className=" text-white h-full overflow-y-auto flex flex-col gap-2">
                                         <div className="px-2 pt-2">
                                             <p className="text-xl text-amain font-semibold">Input</p>
-                                            <p className="font-mono text-lg bg-crk rounded-md p-4 mt-4">{problem.input}</p>
-                                        </div><div className="px-2 pt-2">
-                                            <p className="text-xl text-amain font-semibold">Output</p>
-                                            <p className="font-mono text-lg bg-crk rounded-md p-4 mt-4">{problem.output}</p>
+                                            <textarea className="font-mono text-lg bg-crk rounded-md w-full h-fit p-4 mt-4" onChange={(e) => setIpValue(e.target.value)} value={ipValue}></textarea>
                                         </div>
-
+                                        <div className="px-2 pt-2">
+                                            <p className="text-xl text-amain font-semibold">Output</p>
+                                            <textarea className="font-mono text-lg bg-crk rounded-md w-full p-4 mt-4 focus:border-none focus:outline-none " readOnly value={opValue}></textarea>
+                                        </div>
                                     </div>
                                 </Splitter>
                             </Splitter>
                             <div className="bg-mainbl h-full">
-                                <CodeEditor />
+                                <CodeEditor user={user} problemId={problemId!} ipValue={ipValue} setOpValue={setOpValue} />
                             </div>
                         </Splitter>
 

@@ -1,11 +1,12 @@
 const router = require('express').Router();
 import { Request, Response } from "express";
 import { getUser, login, logout, signup } from "../controllers/authController";
-import { addProblem, getProblems, getSingleProblem } from "../controllers/problemController";
+import { addProblem, getProblems, getSingleProblem, runCode, submitCode } from "../controllers/problemController";
 import { uploadController } from "../controllers/userController";
 // import { upload } from "../middleware/multer.middleware";
 // import multer from "multer";
 import { upload } from "../middleware/multer.middleware";
+import { getSubmissions } from "../controllers/submissionsController";
 require('dotenv').config()
 
 // test route to be removed in production
@@ -27,7 +28,14 @@ router.post('/add', addProblem);
 
 router.get('/problems', getProblems);
 
-router.get('/problems/:id', getSingleProblem)
+router.get('/problems/:id', getSingleProblem);
+
+router.post('/run', runCode);
+
+// submissions routes 
+router.post('/submit', submitCode);
+
+router.get('/submissions', getSubmissions);
 
 // user pfp route 
 // photos middleware 

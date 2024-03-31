@@ -11,6 +11,7 @@ const Profile = () => {
     const { user } = useAuthStore();
     const navigate = useNavigate();
     const [ping, setPing] = useState(false);
+    const [submissions, setSubmissions] = useState([] as any[]);
 
     // checking if user has logged in or not
     useEffect(() => {
@@ -36,6 +37,18 @@ const Profile = () => {
             }
         )()
     }, [ping])
+
+    // function to get submissions 
+    useEffect(() => {
+        (
+            async () => {
+                const response = await axios.get('/submissions', { withCredentials: true });
+                if (response.status === 200) {
+                    setSubmissions(response.data.submissions)
+                }
+            }
+        )()
+    })
 
     // function for when the logout button is clicked
     const logoutFunction = async () => {
