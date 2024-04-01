@@ -1,6 +1,10 @@
-import mongoose from "mongoose";
-
-const submissionSchema = new mongoose.Schema({
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const submissionSchema = new mongoose_1.default.Schema({
     problemId: {
         type: String,
         required: [true, "Please provide a problemId"],
@@ -36,8 +40,6 @@ const submissionSchema = new mongoose.Schema({
         required: [true, "Please provide a timeSubmitted"],
         unique: true,
     }
-})
-
-const SubmissionModel = mongoose.models.SubmissionModel || mongoose.model("Submission", submissionSchema);
-
-export default SubmissionModel;
+});
+const SubmissionModel = mongoose_1.default.models.SubmissionModel || mongoose_1.default.model("Submission", submissionSchema);
+exports.default = SubmissionModel;

@@ -6,7 +6,7 @@ import { uploadController } from "../controllers/userController";
 // import { upload } from "../middleware/multer.middleware";
 // import multer from "multer";
 import { upload } from "../middleware/multer.middleware";
-import { getSubmissions } from "../controllers/submissionsController";
+import { getCurrentSubmission, getSubmissions } from "../controllers/submissionsController";
 require('dotenv').config()
 
 // test route to be removed in production
@@ -35,7 +35,9 @@ router.post('/run', runCode);
 // submissions routes 
 router.post('/submit', submitCode);
 
-router.get('/submissions', getSubmissions);
+router.post('/submissions', getSubmissions);
+
+router.post('/submission/:id', getCurrentSubmission);
 
 // user pfp route 
 // photos middleware 

@@ -12,6 +12,7 @@ const Profile = () => {
     const navigate = useNavigate();
     const [ping, setPing] = useState(false);
     const [submissions, setSubmissions] = useState([] as any[]);
+    const [problemsSolved, setProblemsSolved] = useState(0);
 
     // checking if user has logged in or not
     useEffect(() => {
@@ -26,6 +27,7 @@ const Profile = () => {
                     }
                 }
                 if (response.status === 200) {
+                    setProblemsSolved(response.data.info.problemsSolved);
                     useAuthStore.setState({
                         user: {
                             name: response.data.info.name,
@@ -42,13 +44,18 @@ const Profile = () => {
     useEffect(() => {
         (
             async () => {
-                const response = await axios.get('/submissions', { withCredentials: true });
+                const userForSubmissions = await axios.get('/user', { withCredentials: true });
+                const response = await axios.post('/submissions', { user: userForSubmissions.data.info }, { withCredentials: true });
                 if (response.status === 200) {
-                    setSubmissions(response.data.submissions)
+                    setSubmissions(response.data.submissions);
+                    // console.log(response.data.submissions)
+                }
+                else {
+                    toast.error("Something went wrong")
                 }
             }
         )()
-    })
+    }, [])
 
     // function for when the logout button is clicked
     const logoutFunction = async () => {
@@ -147,7 +154,7 @@ const Profile = () => {
                                 <div>
                                     <div className="flex flex-col items-center my-3">
                                         <div className="flex flex-col items-center w-16 h-16 rounded-md bg-mainbl text-amain ">
-                                            <p className="text-3xl font-bold">130</p>
+                                            <p className="text-3xl font-bold">{problemsSolved}</p>
                                             <p>solved</p>
                                         </div>
 
@@ -163,7 +170,20 @@ const Profile = () => {
                         <div className="min-h-30 sm:mt-[2.73rem] bg-crk rounded-md sm:pt-3  sm:col-span-9">
                             <p className="text-center text-2xl font-medium text-amain">Submissions</p>
                             <div className="bg-stone-500 flex flex-col p-4 my-2 mx-2 rounded-md">
-                                <p>hello world</p>
+                                {
+                                    submissions.length > 0 ? (submissions.map((submission) => (
+                                        <div key={submission.id} className="bg-mainbl p-3 my-2 mx-2 rounded-md flex justify-between items-center">
+                                            <p className="text-amain">{submission.problemName}</p>
+                                            <Link to={`/submissions/${submission.id}`} className={submission.status === "Correct Answer" ? "text-green-400" : "text-red-300"}>
+                                                {submission.status}
+                                            </Link>
+                                            <p className="text-amain">{submission.language}</p>
+                                        </div>
+                                    ))) :
+                                        (
+                                            <p className="text-black text-center">No submissions yet</p>
+                                        )
+                                }
                             </div>
 
 

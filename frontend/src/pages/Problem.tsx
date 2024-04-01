@@ -113,21 +113,21 @@ const Problem = () => {
                                     <div className="text-lg font-sans text-white p-2">
                                         <p>{problem.description}</p>
                                         <br />
-                                        <p className="font-mono">
+                                        <div className="font-mono">
                                             Sample input:
                                             <br />
                                             <p className="bg-crk rounded-md p-2">
                                                 {problem.input}
                                             </p>
-                                        </p>
+                                        </div>
                                         <br />
-                                        <p className="font-mono">
+                                        <div className="font-mono">
                                             Sample output:
                                             <br />
                                             <p className="bg-crk rounded-md p-2">
                                                 {problem.output}
                                             </p>
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <Splitter direction={SplitDirection.Vertical}>

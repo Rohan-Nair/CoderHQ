@@ -7,6 +7,7 @@ import axios from 'axios';
 import Add from './pages/Add';
 import Pfile from './pages/Profile';
 import Problem from './pages/Problem';
+import Submission from './pages/Submission';
 
 axios.defaults.baseURL = 'http://localhost:4000/api';
 
@@ -20,6 +21,7 @@ function App() {
       <Route path='/profile' element={<Pfile />} />
       <Route path='/add' element={<Add />} />
       <Route path='/problem/:problemId' element={<Problem />} />
+      <Route path='/submissions/:id' element={<Submission />} />
     </Routes>
   )
 }

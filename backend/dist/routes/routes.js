@@ -7,6 +7,7 @@ const userController_1 = require("../controllers/userController");
 // import { upload } from "../middleware/multer.middleware";
 // import multer from "multer";
 const multer_middleware_1 = require("../middleware/multer.middleware");
+const submissionsController_1 = require("../controllers/submissionsController");
 require('dotenv').config();
 // test route to be removed in production
 router.get('/test', (req, res) => {
@@ -21,6 +22,11 @@ router.post('/logout', authController_1.logout);
 router.post('/add', problemController_1.addProblem);
 router.get('/problems', problemController_1.getProblems);
 router.get('/problems/:id', problemController_1.getSingleProblem);
+router.post('/run', problemController_1.runCode);
+// submissions routes 
+router.post('/submit', problemController_1.submitCode);
+router.post('/submissions', submissionsController_1.getSubmissions);
+router.post('/submission/:id', submissionsController_1.getCurrentSubmission);
 // user pfp route 
 // photos middleware 
 // const photosMiddleware = multer({ dest: 'uploads/' });

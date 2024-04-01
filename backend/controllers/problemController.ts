@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import ProblemModel from "../models/problemModel";
 import { LANGS } from "../constants/lang";
 import axios from "axios";
-import UserModel from "../models/userModel";
 import SubmissionModel from "../models/submissionModel";
+import ProfileModel from "../models/profileModel";
 
 export const addProblem = async (req: Request, res: Response) => {
     const { title, question, input, output, username } = req.body;
@@ -71,11 +71,23 @@ export const runCode = async (req: Request, res: Response) => {
     }
 }
 
+
+const updateCountifNeeded = async (user: any, problem: any) => {
+    console.log("updateCountifNeeded function");
+    console.log(user);
+    console.log(problem);
+    const correctSubmissions = await SubmissionModel.find({ userId: user.name, problemId: problem._id, status: "Correct Answer" });
+    if (correctSubmissions.length === 0) {
+        await ProfileModel.updateOne({ name: user.name }, { $inc: { problemsSolved: 1 } });
+    }
+    return;
+}
+
 export const submitCode = async (req: Request, res: Response) => {
     console.log("submitCode function");
     const { code, language, problemId, user } = req.body;
     const problem = await ProblemModel.findById(problemId);
-    const userGet = await UserModel.findOne({ name: user.name });
+    const userGet = await ProfileModel.findOne({ name: user.name });
     const { input, output } = problem;
     try {
         const response = await axios.post("https://emkc.org/api/v2/piston/execute", {
@@ -99,13 +111,13 @@ export const submitCode = async (req: Request, res: Response) => {
         } else if (run.stdout === output) {
             message = "Correct Answer";
             res.status(200).json({ message: message });
+            await updateCountifNeeded(userGet, problem);
         } else {
             message = "Wrong Answer";
             res.status(200).json({ message: message });
         }
 
-
-
+        const newTime = new Date().getTime().toString();
         const newSubmission = {
             problemId: problemId,
             problemName: problem.title,
@@ -113,6 +125,7 @@ export const submitCode = async (req: Request, res: Response) => {
             code: code,
             language: language,
             status: message,
+            timeSubmitted: newTime,
         }
         await SubmissionModel.create(newSubmission);
         return res;
