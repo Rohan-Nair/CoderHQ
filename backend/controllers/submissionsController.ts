@@ -21,6 +21,7 @@ export const getSubmissions = async (req: Request, res: Response) => {
 
 export const getCurrentSubmission = async (req: Request, res: Response) => {
     const { id } = req.body;
+    console.log(id);
     try {
         const submission = await SubmissionModel.findOne({ timeSubmitted: id });
         return res.status(200).json({ submission });

@@ -34,6 +34,7 @@ const getSubmissions = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getSubmissions = getSubmissions;
 const getCurrentSubmission = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.body;
+    console.log(id);
     try {
         const submission = yield submissionModel_1.default.findOne({ timeSubmitted: id });
         return res.status(200).json({ submission });

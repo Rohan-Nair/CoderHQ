@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { PiSignOut } from "react-icons/pi";
 import logo from "../assets/logo.png";
 import { HomeIcon } from "@radix-ui/react-icons";
+import { FaUser } from "react-icons/fa6"
 
 const Profile = () => {
     const { user } = useAuthStore();
@@ -143,8 +144,9 @@ const Profile = () => {
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div className="flex flex-col">
+                                                <div className="flex flex-col justify-center items-center">
                                                     <input type="file" ref={fileipref} style={{ display: "none" }} onChange={fileupload} />
+                                                    <FaUser size={80} className="border border-black rounded-full p-3" />
                                                     <p onClick={changeProfileImage} className="hover:underline cursor-pointer text-center text-amain underline">Add Profile Image</p>
                                                 </div>
                                             )

@@ -24,17 +24,18 @@ app.use(cors({
 // connecting to the database
 connect();
 
+
 // routes
 app.use('/api', routes);
 
 // temp
 app.use('/uploads', express.static('uploads'));
 
-
 // this is a test route to check if server is running
 app.use('/', async (req, res) => {
     res.json('Hello World');
 })
+
 
 // starting the server
 app.listen(4000, () => {

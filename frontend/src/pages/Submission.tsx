@@ -5,11 +5,17 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Editor } from "@monaco-editor/react";
 
+interface SubmissionType {
+    code: string,
+    language: string,
+    problemName: string,
+    status: string
+}
 
 const Submission = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [currentSubmission, setCurrentSubmission] = useState({} as any);
+    const [currentSubmission, setCurrentSubmission] = useState({} as SubmissionType);
     const [pfp, setPfp] = useState<string>("");
     useEffect(() => {
         (
@@ -22,8 +28,13 @@ const Submission = () => {
                 setPfp(user.data.info.pfpUrl);
                 const response = await axios.post(`/submission/${id}`, { id }, { withCredentials: true });
                 if (response.status === 200) {
-                    setCurrentSubmission(response.data.submission);
-                    // console.log(response.data.submission);
+                    const { code, language, problemName, status } = response.data.submission;
+                    setCurrentSubmission({
+                        code,
+                        language,
+                        problemName,
+                        status,
+                    })
                 }
                 else {
                     toast.error("Something went wrong");
@@ -66,8 +77,8 @@ const Submission = () => {
                                     </div>
 
                                     <Editor
-                                        defaultLanguage={currentSubmission?.language}
-                                        defaultValue={currentSubmission.code}
+                                        language={currentSubmission?.language}
+                                        value={currentSubmission.code}
                                         theme="vs-dark"
                                         options={{
                                             readOnly: true,
