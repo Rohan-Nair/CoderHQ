@@ -9,7 +9,8 @@ import Pfile from './pages/Profile';
 import Problem from './pages/Problem';
 import Submission from './pages/Submission';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+// axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = "https://coderhq-api.vercel.app/api"
 
 function App() {
 
