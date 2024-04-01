@@ -45,7 +45,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(200).json({ message: "User created successfully" });
     }
     catch (e) {
-        res.status(500).json({ message: "error", er: e });
+        res.status(500).json({ message: "error", er: e.message });
     }
 });
 exports.signup = signup;
