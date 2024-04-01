@@ -31,6 +31,7 @@ const Signup = () => {
             }
 
         } catch (e: any) {
+            console.log(e);
             toast.error("Something went wrong");
         } finally {
             setLoading(false);
