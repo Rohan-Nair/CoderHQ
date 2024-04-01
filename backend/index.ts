@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 // cors middleware (need to change origin to frontend url in production)
 app.use(cors({
-    origin: ["http://localhost:5173", "https://coderhq.vercel.app"],
+    origin: ["http://localhost:5173", "https://coderhq.vercel.app/"],
     credentials: true,
 }));
 
