@@ -2,7 +2,7 @@
   "name": "coderhq-backend",
   "version": "1.0.0",
   "description": "Your application description",
-  "main": "dist/index.js",
+  "main": ".dist/index.js",
   "scripts": {
     "dev": "nodemon index.ts",
     "build": "rimraf dist && tsc",

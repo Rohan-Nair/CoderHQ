@@ -31,10 +31,10 @@ app.use('/api', routes);
 app.use('/uploads', express.static('uploads'));
 
 
-// // this is a test route to check if server is running
-// app.use('/', async (req, res) => {
-//     res.json('Hello World');
-// })
+// this is a test route to check if server is running
+app.use('/', async (req, res) => {
+    res.json('Hello World');
+})
 
 // starting the server
 app.listen(4000, () => {
