@@ -6,7 +6,7 @@ const profileSchema = new mongoose.Schema({
     pfpUrl: {
         type: String,
         required: false,
-        unique: true,
+        unique: false,
     },
     problemsSolved: {
         type: Number,
