@@ -49,7 +49,7 @@ const IndexP = () => {
     return (
         <>
             <div className='flex justify-center h-screen bg-bground'>
-                <div className='max-w-[1920px] w-full'>
+                <div className='max-w-[1920px] w-full max-h-screen overflow-y-auto'>
                     <header className='w-full max-w-[1920px] h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
                         <Link to={"/"} className='flex items-center gap-2 outline-none'>
                             <img src={logo} className="w-12 h-12" />
@@ -68,15 +68,15 @@ const IndexP = () => {
                         }
                     </header>
 
-                    <section className="mt-[5.5rem] h-full pt-2 px-2 md:w-[50rem] md:h-[40rem] rounded-md border-2 border-amain bg-mainbl mx-auto overflow-y-auto">
+                    <section className="mt-[5.5rem] pt-2 px-2 md:w-[50rem] h-fit md:h-[40rem] rounded-md border-2 border-none bg-crk md:mx-auto mx-2 overflow-y-auto">
 
 
                         {
                             problems.map((singleproblem: any) => {
                                 return (
-                                    <div key={singleproblem._id} className='flex flex-col gap-2 p-2 m-3 bg-crk rounded-md'>
+                                    <div key={singleproblem._id} className='flex flex-col gap-2 p-2 m-3 bg-mainbl rounded-md'>
                                         <div className='flex justify-between items-center gap-2'>
-                                            <div className='flex items-center justify-center gap-2'>
+                                            <div className='flex flex-col md:flex-row items-start md:items-center justify-center gap-2'>
                                                 <span className='text-amain font-bold'>{singleproblem.title}</span>
                                                 <span className='text-md text-white'>by {singleproblem.name}</span>
                                             </div>

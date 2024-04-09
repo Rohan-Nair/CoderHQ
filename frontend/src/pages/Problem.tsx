@@ -7,6 +7,7 @@ import logo from "../assets/logo.png"
 import Splitter, { SplitDirection } from "@devbookhq/splitter";
 import CodeEditor from "../components/CodeEditor";
 import { useAuthStore } from "../store/store";
+import CodeEditorMobile from "../components/CodeEditorMobile";
 
 interface ProblemType {
     description: string,
@@ -87,7 +88,7 @@ const Problem = () => {
     return (
         <>
             <div className="flex justify-center h-screen bg-mainbl">
-                <div className='max-w-[1920px] w-full'>
+                <div className='max-w-[1920px] w-full max-h-screen overflow-y-auto'>
                     <header className='bg-bground max-w-[1920px] w-full h-fit fixed backdrop-blur-3xl flex justify-between items-center p-3 shadow-sm shadow-amain'>
                         <Link to={"/"} className='flex items-center gap-2 outline-none'>
                             <img src={logo} className="w-12 h-12" />
@@ -148,6 +149,54 @@ const Problem = () => {
                             </div>
                         </Splitter>
 
+                    </section>
+
+                    {/* this is the layout for the smaller screens */}
+                    <section className="sm:hidden mt-[5.5rem] pt-2 px-2 md:w-[50rem] h-fit md:h-[40rem] rounded-md border-2 border-none bg-mainbl md:mx-auto mx-2 overflow-y-auto">
+
+                        <div className="text-white  overflow-y-auto">
+                            <div className="p-2 flex items-end justify-between">
+                                <p className="text-3xl text-amain font-semibold">{problem.title}</p>
+                                <button onClick={() => navigate('/')} className='bg-amain hover:bg-amainhover text-mainbl text-md border-none font-medium py-2 px-2 rounded'>All Problems</button>
+                            </div>
+                            <p className="p-2">Contributed by <span className="text-amain text-md">{problem.name}</span></p>
+                            <div className="text-lg font-sans text-white p-2">
+                                <p>{problem.description}</p>
+                                <br />
+                                <div className="font-mono">
+                                    Sample input:
+                                    <br />
+                                    <p className="bg-crk rounded-md p-2">
+                                        {problem.input}
+                                    </p>
+                                </div>
+                                <br />
+                                <div className="font-mono">
+                                    Sample output:
+                                    <br />
+                                    <p className="bg-crk rounded-md p-2">
+                                        {problem.output}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className=" text-white overflow-y-auto flex flex-col gap-2">
+                                <div className="px-2 pt-2">
+                                    <p className="text-xl text-amain font-semibold">Input</p>
+                                    <textarea className="font-mono text-lg bg-crk rounded-md w-full h-fit p-4 mt-4" onChange={(e) => setIpValue(e.target.value)} value={ipValue}></textarea>
+                                </div>
+                                <div className="px-2 pt-2">
+                                    <p className="text-xl text-amain font-semibold">Output</p>
+                                    <textarea className="font-mono text-lg bg-crk rounded-md w-full p-4 mt-4 focus:border-none focus:outline-none " readOnly value={opValue}></textarea>
+                                </div>
+                            </div>
+
+                            <div>
+                                <CodeEditorMobile user={user} problemId={problemId!} ipValue={ipValue} setOpValue={setOpValue} />
+                            </div>
+
+
+
+                        </div>
                     </section>
 
 
